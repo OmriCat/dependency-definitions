@@ -9,13 +9,12 @@ abstract class DependencyContainer(
   val version: String? = null
 )
 
-data class Dep(
+private data class Dep(
   val group: String? = null,
   val name: String = "",
   val version: String? = null,
   val prefix: String = "",
   val suffix: String = ""
-
 )
 
 fun DependencyContainer.dep(
@@ -46,11 +45,7 @@ private fun DependencyContainer.defineDep(name: String): Dep =
     }
   }
 
-private fun <T> T?.override(overrideValue: T?): T? =
-  overrideValue ?: this
-
-
-inline fun <reified T : Any> T.containingObjects(): List<T> {
+private inline fun <reified T : Any> T.containingObjects(): List<T> {
   val containingObjects = mutableListOf<T>()
   var parent: T? = this::class.enclosingObjectInstance as? T
   while (parent != null) {
@@ -60,4 +55,4 @@ inline fun <reified T : Any> T.containingObjects(): List<T> {
   return containingObjects.toList().reversed()
 }
 
-val KClass<*>.enclosingObjectInstance get() = java.enclosingClass.kotlin.objectInstance
+private val KClass<*>.enclosingObjectInstance get() = java.enclosingClass.kotlin.objectInstance
