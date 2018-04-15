@@ -14,6 +14,9 @@ repositories {
 
 dependencies {
   resolutionRules("com.netflix.nebula:gradle-resolution-rules:0.52.0")
+
+  testImplementation("junit:junit:4.12")
+  testImplementation(kotlin("test"))
 }
 
 val sourcesJar by tasks.creating(Jar::class) {
